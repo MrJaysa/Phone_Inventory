@@ -1,0 +1,62 @@
+{% extends "base.htm" %}
+{% block head %}
+    <title>Home</title>
+{% endblock %}
+
+
+{% block content %}
+    <nav class="navbar navbar-light" style="background-color: #f58e2e; color: white">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#" style="color: white;">Mobile Phone Inventory</a>
+            <a href="/add-item" class="btn btn-outline-secondary text-black">Add Item to inventory</a>
+        </div>
+    </nav>
+    {% include 'flash/flash.htm' %}
+    <div class="container mt-3">
+        <div class="card">
+            <div class="card-body">
+                {% if store %}
+                    <h2 class="lead">
+                        The list of items in the inventory of mobile phones are in the table below
+                    </h2>
+        
+                    <table class="table">
+                        <thead>
+                            <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Phone</th>
+                            <th scope="col">Price (<s>N</s>)</th>
+                            <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in store %}
+                            <tr>
+                                <th scope="row">{{loop.index}}</th>
+                                <td>{{item.item_name}}</td>
+                                <td>{{item.price}}</td>
+                                <td><a href="/delete-item/{{item.public_key}}" class="btn btn-danger">Delete item</a></td>
+                            </tr>
+                            {% endfor %}
+                            <tr>
+                                <th colspan="3">Total price of items: </th>
+                                <td colspan="1">
+                                    {{total}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div>
+                        <p>Add more items to the inventory</p>
+                        <a href="/add-item" class="btn btn-outline-secondary">Add Item to Inventory</a>
+                    </div>
+                {% else %}
+                <div>
+                    <p>They are no item in the inventory</p>
+                    <a href="/add-item" class="btn btn-outline-secondary">Add Item to Inventory</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

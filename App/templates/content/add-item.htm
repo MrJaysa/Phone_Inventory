@@ -1,0 +1,55 @@
+{% extends "base.htm" %}
+{% block head %}
+    <title>Home</title>
+{% endblock %}
+
+
+{% block content %}
+    <nav class="navbar navbar-light" style="background-color: #f58e2e; color: white">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#" style="color: white;">Mobile Phone Inventory</a>
+            <a href="/" class="btn btn-outline-secondary text-black">Home</a>
+        </div>
+    </nav>
+    {% include 'flash/flash.htm' %}
+    <div class="container mt-3">
+        <div class="card">
+            <div class="card-body">
+                    <h2 class="lead">
+                        Add a Mobile phone to inventory
+                    </h2>
+
+                    <div class="row justify-content-center pt-5 pb-5">
+                        <form action="/add-item" method="post">
+                            {{form.hidden_tag()}}
+                            <div class="mb-3">
+                                <label for="item">Item Name</label>
+                                {{ form.item(class='form-control mt-1', id='item', type='text', placeholder='Item Name (Mobile phone)',  style="height: 50px;",  autofocus="yes")}}
+                                {% if form.item.errors %}
+                                {% for error in form.item.errors %}
+                                <div style="margin-top: 2px !important;margin-bottom: 20px !important; color: red; ">
+                                    <p>* {{ error }}</p>
+                                </div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                            <div class="mb-3">
+                                <label for="price">Price</label>
+                                {{ form.price(class='form-control mt-1', id='item', type='number', placeholder='Item Price',  style="height: 50px;")}}
+                                {% if form.price.errors %}
+                                {% for error in form.price.errors %}
+                                <div style="margin-top: 2px !important;margin-bottom: 20px !important; color: red; ">
+                                    <p>* {{ error }}</p>
+                                </div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                            <div class="mb-3">
+                                <button class="btn btn-primary w-100">ADD ITEM</button>
+                            </div>
+                        </form>
+                    </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

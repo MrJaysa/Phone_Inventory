@@ -1,0 +1,17 @@
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% set category, message = messages[0] %}
+<div id="alertnav" class="alert alert-{{category}} alert-dismissible fade show" style="position: relative" role="alert">
+	{{message}}
+	<button id="closebtn"  type="button" class="close" style="position: absolute; right: 10px; border: none; background: none; font-size: 16pt; width: 50px; color: red" data-dismiss="alert" aria-label="Close">
+	  <span aria-hidden="true">&times;</span>
+	</button>
+</div>
+
+<script>
+    document.getElementById('closebtn').addEventListener('click', () => {
+        alertnav.style.display = 'none'
+    })
+</script>
+{% endif %}
+{% endwith %}
